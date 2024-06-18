@@ -174,6 +174,7 @@ function WithImg() {
                         style={{ cursor: "pointer" }}
                       />
                       <img
+                        className="delete-icon"
                         src="https://i.postimg.cc/d3MWhZ2R/3807871.png"
                         alt="Delete"
                         onClick={() => handledelete(i.id)}
