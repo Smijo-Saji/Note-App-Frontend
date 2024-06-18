@@ -466,9 +466,13 @@ function Todo() {
           <Button variant="secondary" onClick={handleClose1}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleadd}>
+          <button
+            className="btn text-white"
+            style={{ backgroundColor: "#031224" }}
+            onClick={handleadd}
+          >
             Add
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
 
@@ -583,9 +587,13 @@ function Todo() {
           <Button variant="secondary" onClick={handleClose3}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleupdate}>
+          <button
+            className="btn text-white"
+            onClick={handleupdate}
+            style={{ backgroundColor: "#031224" }}
+          >
             Update
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
       {/* <ToastContainer /> */}

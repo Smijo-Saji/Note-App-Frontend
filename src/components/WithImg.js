@@ -174,7 +174,7 @@ function WithImg() {
                         style={{ cursor: "pointer" }}
                       />
                       <img
-                        src="https://i.postimg.cc/tCzDhv6h/325437.png"
+                        src="https://i.postimg.cc/d3MWhZ2R/3807871.png"
                         alt="Delete"
                         onClick={() => handledelete(i.id)}
                         style={{ cursor: "pointer" }}
@@ -248,9 +248,13 @@ function WithImg() {
           <Button variant="secondary" onClick={handleClose2}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleAdd}>
+          <button
+            className="btn text-white"
+            style={{ backgroundColor: "#031224" }}
+            onClick={handleAdd}
+          >
             Add
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
       {/* edit */}
@@ -284,9 +288,13 @@ function WithImg() {
           <Button variant="secondary" onClick={handleClose4}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleupdate}>
+          <button
+            className="btn text-white"
+            style={{ backgroundColor: "#031224" }}
+            onClick={handleupdate}
+          >
             Update
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
       {/* <ToastContainer /> */}
