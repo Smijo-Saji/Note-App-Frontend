@@ -156,13 +156,12 @@ function WithImg() {
         </div>
       </div>
       <div className="note-sec  rounded shadow p-3 pt-4 d-flex flex-column ">
-        {/* <b className="ms-3 text-withImg">Notes</b> */}
         <div className="ms-3 text-withImg align-self-start fw-bold">Notes</div>
         <div className="card-with-img d-flex justify-content-center flex-wrap gap-3 ">
           {!loading ? (
             withImg.length > 0 ? (
               withImg.map((i) => (
-                <div className="card-withImg" key={i.id}>
+                <div className="card-withImg shadow" key={i.id}>
                   <img src={i.imgUrl} alt="" />
                   <div className="card__content d-flex flex-column justify-content-between">
                     <p className="card__title text-white">{i.title}</p>

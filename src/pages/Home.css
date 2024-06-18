@@ -104,6 +104,7 @@
   height: 87%;
   scrollbar-width: none;
   overflow-y: scroll;
+  padding-bottom: 10px;
 }
 .d-flex {
   align-content: flex-start;
