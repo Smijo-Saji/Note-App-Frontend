@@ -17,7 +17,7 @@ function Header() {
   };
 
   return (
-    <div className="mt-3 header-div shadow-sm">
+    <div className="mt-3 header-div shadow-sm py-3">
       <Container>
         <div className="main d-flex align-items-center justify-content-evenly">
           <div className="user-sec d-flex align-items-center gap-2">

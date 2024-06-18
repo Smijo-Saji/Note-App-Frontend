@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { base_url } from "./base_url";
 
-export const getTodo = createAsyncThunk("user/getTodo", async () => {
+export const getTodo = createAsyncThunk("todoData/getTodo", async () => {
   try {
     const response = await axios.get(`${base_url}/todo`);
     return response.data;
@@ -11,27 +11,33 @@ export const getTodo = createAsyncThunk("user/getTodo", async () => {
   }
 });
 
-export const addTodo = createAsyncThunk("user/addTodo", async (userData) => {
-  try {
-    const response = await axios.post(`${base_url}/todo`, userData);
-    console.log(response);
-    return response.data;
-  } catch (error) {
-    return error;
+export const addTodo = createAsyncThunk(
+  "todoData/addTodo",
+  async (userData) => {
+    try {
+      const response = await axios.post(`${base_url}/todo`, userData);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
   }
-});
+);
 
-export const deleteTodo = createAsyncThunk("user/deleteTodo", async (id) => {
-  try {
-    const response = await axios.delete(`${base_url}/todo/${id}`);
-    return id;
-  } catch (error) {
-    return error;
+export const deleteTodo = createAsyncThunk(
+  "todoData/deleteTodo",
+  async (id) => {
+    try {
+      const response = await axios.delete(`${base_url}/todo/${id}`);
+      return id;
+    } catch (error) {
+      return error;
+    }
   }
-});
+);
 
 export const updateTodo = createAsyncThunk(
-  "user/updateTodo",
+  "todoData/updateTodo",
   async (userData) => {
     try {
       const response = await axios.put(

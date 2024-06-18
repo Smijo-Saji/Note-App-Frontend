@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Card from "react-bootstrap/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast, Bounce } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast, Bounce } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import {
   createwithImg,
   deletewithImg,
@@ -14,11 +13,24 @@ import {
 } from "../Redux/withImgSlice";
 import axios from "axios";
 import { base_url } from "../Redux/base_url";
+import { Toaster, toast } from "sonner";
 
 function WithImg() {
-  const dispatch = useDispatch();
-  const { withImg, loading, error } = useSelector((state) => state.Img);
   const [show2, setShow2] = useState(false);
+  const [fieldData, setFieldData] = useState({
+    imgUrl: "",
+    title: "",
+  });
+
+  const [show4, setShow4] = useState(false);
+  const [singleField, setSingleField] = useState({
+    imgUrl: "",
+    title: "",
+  });
+  const [editFieldData, setEditFieldData] = useState({ imgUrl: "", title: "" });
+
+  const dispatch = useDispatch();
+  const { withImg, loading, error } = useSelector((state) => state?.Img);
 
   const handleClose2 = () => {
     setShow2(false);
@@ -26,18 +38,11 @@ function WithImg() {
   };
   const handleShow2 = () => setShow2(true);
 
-  const [show4, setShow4] = useState(false);
-
   const handleClose4 = () => {
     setShow4(false);
     setFieldData({ imgUrl: "", title: "" });
   };
   const handleShow4 = () => setShow4(true);
-
-  const [fieldData, setFieldData] = useState({
-    imgUrl: "",
-    title: "",
-  });
 
   const setData = (e) => {
     const { name, value } = e.target;
@@ -47,30 +52,32 @@ function WithImg() {
   const handleAdd = () => {
     let { imgUrl, title } = fieldData;
     if (!imgUrl || !title) {
-      toast.warn("Please Fil All Datas!", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      // toast.warn("Please Fil All Datas!", {
+      //   position: "bottom-right",
+      //   autoClose: 3000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      //   transition: Bounce,
+      // });
+      toast.warning("Please Fil All Datas!");
     } else {
       dispatch(createwithImg(fieldData));
-      toast.success("Successfully Addded", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      // toast.success("Successfully Addded", {
+      //   position: "bottom-right",
+      //   autoClose: 3000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      //   transition: Bounce,
+      // });
+      toast.success("Successfully Addded");
       handleClose2();
       setFieldData({ imgUrl: "", title: "" });
     }
@@ -78,28 +85,23 @@ function WithImg() {
 
   const handledelete = (id) => {
     dispatch(deletewithImg(id));
-    toast.error("Deleted Successfully", {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
+    // toast.error("Deleted Successfully", {
+    //   position: "bottom-right",
+    //   autoClose: 3000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "light",
+    //   transition: Bounce,
+    // });
+    toast.success("Deleted Successfully");
   };
 
   useEffect(() => {
     dispatch(showwithImg());
   }, []);
-
-  const [singleField, setSingleField] = useState({
-    imgUrl: "",
-    title: "",
-  });
-  const [editFieldData, setEditFieldData] = useState({ imgUrl: "", title: "" });
 
   const handleeditmodal = async (id) => {
     const response = await axios.get(`${base_url}/withImg/${id}`);
@@ -114,17 +116,18 @@ function WithImg() {
   };
   const handleupdate = () => {
     dispatch(editwithImg(editFieldData));
-    toast.success("Updated Successfully", {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
+    // toast.success("Updated Successfully", {
+    //   position: "bottom-right",
+    //   autoClose: 3000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "light",
+    //   transition: Bounce,
+    // });
+    toast.success("Updated Successfully");
     handleClose4();
   };
 
@@ -185,7 +188,7 @@ function WithImg() {
               <img
                 src="https://i.postimg.cc/FRV8f9z7/59727218100.png"
                 alt="no-record"
-                className="w-75"
+                style={{ width: "300px" }}
               />
             )
           ) : (
@@ -287,7 +290,8 @@ function WithImg() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
+      <Toaster richColors />
     </>
   );
 }

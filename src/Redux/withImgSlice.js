@@ -3,7 +3,7 @@ import axios from "axios";
 import { base_url } from "./base_url";
 
 export const createwithImg = createAsyncThunk(
-  "users/createwithImg",
+  "withImgData/createwithImg",
   async (bodyData) => {
     try {
       const response = await axios.post(`${base_url}/withImg`, bodyData);
@@ -23,7 +23,7 @@ export const showwithImg = createAsyncThunk("users/showwithImg", async () => {
 });
 
 export const deletewithImg = createAsyncThunk(
-  "users/deletewithImg",
+  "withImgData/deletewithImg",
   async (id) => {
     try {
       const response = await axios.delete(`${base_url}/withImg/${id}`);
@@ -35,7 +35,7 @@ export const deletewithImg = createAsyncThunk(
 );
 
 export const editwithImg = createAsyncThunk(
-  "users/editwithImg",
+  "withImgData/editwithImg",
   async (bodyData) => {
     try {
       const response = await axios.put(

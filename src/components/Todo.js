@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast, Bounce } from "react-toastify";
+// import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
@@ -18,14 +18,24 @@ import {
 } from "../Redux/todoSlice";
 import axios from "axios";
 import { base_url } from "../Redux/base_url";
+import { Toaster, toast } from "sonner";
 
 function Todo() {
   const [sortLabel, setSortLabel] = useState("Sort By");
+  const [show1, setShow1] = useState(false);
+  const [selectedCheckbox, setSelectedCheckbox] = useState(false);
+  const [show3, setShow3] = useState(false);
+  const [details, setDetails] = useState({
+    title: "",
+    description: "",
+    deadline: "",
+    category: "",
+  });
+  const [singleData, setSingleData] = useState({});
 
   const dispatch = useDispatch();
-  const { todo, loading, error } = useSelector((state) => state.app);
+  const { todo, loading, error } = useSelector((state) => state?.app);
 
-  const [show1, setShow1] = useState(false);
   const handleClose1 = () => {
     setShow1(false);
     setDetails({
@@ -40,7 +50,6 @@ function Todo() {
     setShow1(true);
   };
 
-  const [show3, setShow3] = useState(false);
   const handleClose3 = () => {
     setShow3(false);
     setDetails({
@@ -52,14 +61,6 @@ function Todo() {
   };
   const handleShow3 = () => setShow3(true);
 
-  const [selectedCheckbox, setSelectedCheckbox] = useState(false);
-
-  const [details, setDetails] = useState({
-    title: "",
-    description: "",
-    deadline: "",
-    category: "",
-  });
   console.log(details);
   const setDatas = (e) => {
     let { value, name } = e.target;
@@ -77,37 +78,35 @@ function Todo() {
     }
   };
 
-  useEffect(() => {
-    dispatch(getTodo());
-  }, [dispatch]);
-
   const handleadd = () => {
     let { title, description, deadline, category } = details;
     if (!title || !description || !deadline || !category) {
-      toast.warn("Please Fil All Datas!", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      // toast.warn("Please Fill All Datas!", {
+      //   position: "bottom-right",
+      //   autoClose: 3000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      //   transition: Bounce,
+      // });
+      toast.warning("Please Fill All Datas!");
     } else {
       dispatch(addTodo(details));
-      toast.success("Successfully Addded", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toast.success("Successfully Added");
+      // toast.success("Successfully Added", {
+      //   position: "bottom-right",
+      //   autoClose: 3000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      //   transition: Bounce,
+      // });
       handleClose1();
       setDetails({
         title: "",
@@ -120,21 +119,20 @@ function Todo() {
 
   const handledelete = (id) => {
     dispatch(deleteTodo(id));
-    toast.error("Deleted Successfully", {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
-    alert("deleted");
+    // toast.error("Deleted Successfully", {
+    //   position: "bottom-right",
+    //   autoClose: 3000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "light",
+    //   transition: Bounce,
+    // });
+    toast.success("Deleted Successfully");
   };
 
-  const [singleData, setSingleData] = useState({});
   const setEditDatas = (e) => {
     let { value, name } = e.target;
     setSingleData((prevDetails) => {
@@ -147,36 +145,27 @@ function Todo() {
   };
 
   const handleedit = async (id) => {
-    const data = await axios.get(`${base_url}/todo/${id}`);
-    setSingleData(data.data);
-    setSelectedCheckbox(data.data.category); // Set the selected checkbox
+    const response = await axios.get(`${base_url}/todo/${id}`);
+    setSingleData(response?.data);
+    setSelectedCheckbox(response?.data?.category); // Set the selected checkbox
     handleShow3();
   };
   const handleupdate = () => {
     dispatch(updateTodo(singleData));
-    toast.success("Updated Successfully", {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Bounce,
-    });
+    // toast.success("Updated Successfully", {
+    //   position: "bottom-right",
+    //   autoClose: 3000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "light",
+    //   transition: Bounce,
+    // });
+    toast.success("Updated Successfully");
     handleClose3();
   };
-
-  useEffect(() => {
-    var today = new Date().toISOString().split("T")[0];
-
-    const dateInput = document.getElementsByName("deadline")[0];
-
-    if (dateInput) {
-      dateInput.setAttribute("min", today);
-    }
-  }, [show1, show3]);
 
   const sortCards = (value) => {
     if (value == "All") {
@@ -206,6 +195,21 @@ function Todo() {
     dispatch(sortTodoDesc());
     setSortLabel("Des");
   };
+
+  useEffect(() => {
+    var today = new Date().toISOString().split("T")[0];
+
+    const dateInput = document.getElementsByName("deadline")[0];
+
+    if (dateInput) {
+      dateInput.setAttribute("min", today);
+    }
+  }, [show1, show3]);
+
+  useEffect(() => {
+    dispatch(getTodo());
+  }, [dispatch]);
+
   return (
     <>
       <div
@@ -232,7 +236,7 @@ function Todo() {
 
       <div className="todo-sec  rounded shadow p-3 pt-4">
         <div className="d-flex align-items-center justify-content-between flex-wrap">
-          <b className="text-todo">To-Do</b>
+          <div className="text-todo fw-bold">To-Do</div>
           <div className="d-flex gap-3 ms-5 sort-btn-div">
             <button
               className="sort-btn sort-btn-active"
@@ -584,7 +588,8 @@ function Todo() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
+      <Toaster richColors />
     </>
   );
 }
