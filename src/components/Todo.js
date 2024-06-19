@@ -4,7 +4,6 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
-// import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
@@ -61,7 +60,6 @@ function Todo() {
   };
   const handleShow3 = () => setShow3(true);
 
-  console.log(details);
   const setDatas = (e) => {
     let { value, name } = e.target;
     if (name === "category") {
@@ -81,32 +79,10 @@ function Todo() {
   const handleadd = () => {
     let { title, description, deadline, category } = details;
     if (!title || !description || !deadline || !category) {
-      // toast.warn("Please Fill All Datas!", {
-      //   position: "bottom-right",
-      //   autoClose: 3000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      //   transition: Bounce,
-      // });
       toast.warning("Please Fill All Datas!");
     } else {
       dispatch(addTodo(details));
       toast.success("Successfully Added");
-      // toast.success("Successfully Added", {
-      //   position: "bottom-right",
-      //   autoClose: 3000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      //   transition: Bounce,
-      // });
       handleClose1();
       setDetails({
         title: "",
@@ -119,17 +95,6 @@ function Todo() {
 
   const handledelete = (id) => {
     dispatch(deleteTodo(id));
-    // toast.error("Deleted Successfully", {
-    //   position: "bottom-right",
-    //   autoClose: 3000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    //   theme: "light",
-    //   transition: Bounce,
-    // });
     toast.success("Deleted Successfully");
   };
 
@@ -152,17 +117,6 @@ function Todo() {
   };
   const handleupdate = () => {
     dispatch(updateTodo(singleData));
-    // toast.success("Updated Successfully", {
-    //   position: "bottom-right",
-    //   autoClose: 3000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    //   theme: "light",
-    //   transition: Bounce,
-    // });
     toast.success("Updated Successfully");
     handleClose3();
   };
@@ -479,7 +433,7 @@ function Todo() {
       {/* edit modal */}
 
       <Modal show={show3} onHide={handleClose3} centered>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Update To-Do</Modal.Title>
         </Modal.Header>
         <Modal.Body className="d-flex flex-column gap-3">
@@ -596,7 +550,6 @@ function Todo() {
           </button>
         </Modal.Footer>
       </Modal>
-      {/* <ToastContainer /> */}
       <Toaster richColors />
     </>
   );

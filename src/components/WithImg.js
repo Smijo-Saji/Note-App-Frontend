@@ -3,8 +3,6 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
-// import { ToastContainer, toast, Bounce } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 import {
   createwithImg,
   deletewithImg,
@@ -52,31 +50,9 @@ function WithImg() {
   const handleAdd = () => {
     let { imgUrl, title } = fieldData;
     if (!imgUrl || !title) {
-      // toast.warn("Please Fil All Datas!", {
-      //   position: "bottom-right",
-      //   autoClose: 3000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      //   transition: Bounce,
-      // });
       toast.warning("Please Fil All Datas!");
     } else {
       dispatch(createwithImg(fieldData));
-      // toast.success("Successfully Addded", {
-      //   position: "bottom-right",
-      //   autoClose: 3000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      //   transition: Bounce,
-      // });
       toast.success("Successfully Addded");
       handleClose2();
       setFieldData({ imgUrl: "", title: "" });
@@ -85,17 +61,6 @@ function WithImg() {
 
   const handledelete = (id) => {
     dispatch(deletewithImg(id));
-    // toast.error("Deleted Successfully", {
-    //   position: "bottom-right",
-    //   autoClose: 3000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    //   theme: "light",
-    //   transition: Bounce,
-    // });
     toast.success("Deleted Successfully");
   };
 
@@ -116,17 +81,6 @@ function WithImg() {
   };
   const handleupdate = () => {
     dispatch(editwithImg(editFieldData));
-    // toast.success("Updated Successfully", {
-    //   position: "bottom-right",
-    //   autoClose: 3000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    //   theme: "light",
-    //   transition: Bounce,
-    // });
     toast.success("Updated Successfully");
     handleClose4();
   };
@@ -260,7 +214,7 @@ function WithImg() {
       </Modal>
       {/* edit */}
       <Modal show={show4} onHide={handleClose4} centered>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Update Note With Image</Modal.Title>
         </Modal.Header>
         <Modal.Body className="d-flex flex-column gap-3">
